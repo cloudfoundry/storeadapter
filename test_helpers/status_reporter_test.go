@@ -1,7 +1,7 @@
 package test_helpers_test
 
 import (
-	. "github.com/cloudfoundry/storeadapter/test_helpers"
+	. "github.com/c4pt0r/storeadapter/test_helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

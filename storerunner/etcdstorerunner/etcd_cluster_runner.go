@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/cloudfoundry/gunk/workpool"
-	"github.com/cloudfoundry/storeadapter"
-	"github.com/cloudfoundry/storeadapter/etcdstoreadapter"
+	"github.com/c4pt0r/storeadapter"
+	"github.com/c4pt0r/storeadapter/etcdstoreadapter"
 	etcdclient "github.com/coreos/go-etcd/etcd"
 	. "github.com/onsi/gomega"
 	"github.com/pivotal-golang/clock"

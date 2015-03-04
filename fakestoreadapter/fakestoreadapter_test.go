@@ -3,9 +3,9 @@ package fakestoreadapter_test
 import (
 	"errors"
 
-	"github.com/cloudfoundry/storeadapter"
-	. "github.com/cloudfoundry/storeadapter/fakestoreadapter"
-	. "github.com/cloudfoundry/storeadapter/storenodematchers"
+	"github.com/c4pt0r/storeadapter"
+	. "github.com/c4pt0r/storeadapter/fakestoreadapter"
+	. "github.com/c4pt0r/storeadapter/storenodematchers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

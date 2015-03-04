@@ -5,10 +5,10 @@ import (
 	"time"
 
 	"github.com/cloudfoundry/gunk/workpool"
-	. "github.com/cloudfoundry/storeadapter"
-	. "github.com/cloudfoundry/storeadapter/etcdstoreadapter"
-	. "github.com/cloudfoundry/storeadapter/storenodematchers"
-	"github.com/cloudfoundry/storeadapter/test_helpers"
+	. "github.com/c4pt0r/storeadapter"
+	. "github.com/c4pt0r/storeadapter/etcdstoreadapter"
+	. "github.com/c4pt0r/storeadapter/storenodematchers"
+	"github.com/c4pt0r/storeadapter/test_helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

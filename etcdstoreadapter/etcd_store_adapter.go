@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/cloudfoundry/gunk/workpool"
-	"github.com/cloudfoundry/storeadapter"
+	"github.com/c4pt0r/storeadapter"
 	"github.com/coreos/go-etcd/etcd"
 	uuid "github.com/nu7hatch/gouuid"
 )
