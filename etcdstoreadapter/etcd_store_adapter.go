@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/cloudfoundry/gunk/workpool"
-	"github.com/cloudfoundry/storeadapter"
+	"github.com/c4pt0r/storeadapter"
 	"github.com/coreos/go-etcd/etcd"
 	uuid "github.com/nu7hatch/gouuid"
 )
@@ -165,7 +165,12 @@ func (adapter *ETCDStoreAdapter) Create(node storeadapter.StoreNode) error {
 	results := make(chan error, 1)
 
 	adapter.workPool.Submit(func() {
-		_, err := adapter.client.Create(node.Key, string(node.Value), node.TTL)
+		var err error
+		if node.Dir {
+			_, err = adapter.client.CreateDir(node.Key, node.TTL)
+		} else {
+			_, err = adapter.client.Create(node.Key, string(node.Value), node.TTL)
+		}
 		results <- err
 	})
 
@@ -176,7 +181,12 @@ func (adapter *ETCDStoreAdapter) Update(node storeadapter.StoreNode) error {
 	results := make(chan error, 1)
 
 	adapter.workPool.Submit(func() {
-		_, err := adapter.client.Update(node.Key, string(node.Value), node.TTL)
+		var err error
+		if node.Dir {
+			_, err = adapter.client.UpdateDir(node.Key, node.TTL)
+		} else {
+			_, err = adapter.client.Update(node.Key, string(node.Value), node.TTL)
+		}
 		results <- err
 	})
 
@@ -506,13 +516,18 @@ func (adapter *ETCDStoreAdapter) maintainNode(storeNode storeadapter.StoreNode, 
 		case <-timer.C:
 			for {
 				if created {
-					_, err := adapter.client.CompareAndSwap(
-						storeNode.Key,
-						string(storeNode.Value),
-						storeNode.TTL,
-						string(storeNode.Value),
-						0,
-					)
+					var err error
+					if storeNode.Dir {
+						_, err = adapter.client.UpdateDir(storeNode.Key, storeNode.TTL)
+					} else {
+						_, err = adapter.client.CompareAndSwap(
+							storeNode.Key,
+							string(storeNode.Value),
+							storeNode.TTL,
+							string(storeNode.Value),
+							0,
+						)
+					}
 
 					if err == nil {
 						frequencyCycle++
@@ -545,7 +560,12 @@ func (adapter *ETCDStoreAdapter) maintainNode(storeNode storeadapter.StoreNode, 
 				} else {
 					frequencyCycle = 0
 
-					_, err := adapter.client.Create(storeNode.Key, string(storeNode.Value), storeNode.TTL)
+					var err error
+					if storeNode.Dir {
+						_, err = adapter.client.CreateDir(storeNode.Key, storeNode.TTL)
+					} else {
+						_, err = adapter.client.Create(storeNode.Key, string(storeNode.Value), storeNode.TTL)
+					}
 					if err == nil {
 						created = true
 						owned = true
@@ -569,7 +589,11 @@ func (adapter *ETCDStoreAdapter) maintainNode(storeNode storeadapter.StoreNode, 
 			}
 
 		case released := <-releaseNode:
-			adapter.client.CompareAndDelete(storeNode.Key, string(storeNode.Value), 0)
+			if storeNode.Dir {
+				adapter.client.DeleteDir(storeNode.Key)
+			} else {
+				adapter.client.CompareAndDelete(storeNode.Key, string(storeNode.Value), 0)
+			}
 			timer.Stop()
 			close(nodeStatus)
 			if released != nil {

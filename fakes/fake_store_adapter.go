@@ -4,7 +4,7 @@ package fakes
 import (
 	"sync"
 
-	"github.com/cloudfoundry/storeadapter"
+	"github.com/c4pt0r/storeadapter"
 )
 
 type FakeStoreAdapter struct {

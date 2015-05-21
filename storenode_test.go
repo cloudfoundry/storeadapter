@@ -1,7 +1,7 @@
 package storeadapter_test
 
 import (
-	. "github.com/cloudfoundry/storeadapter"
+	. "github.com/c4pt0r/storeadapter"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

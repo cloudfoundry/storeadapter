@@ -4,8 +4,8 @@ import (
 	"errors"
 	"time"
 
-	. "github.com/cloudfoundry/storeadapter"
-	"github.com/cloudfoundry/storeadapter/fakes"
+	. "github.com/c4pt0r/storeadapter"
+	"github.com/c4pt0r/storeadapter/fakes"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

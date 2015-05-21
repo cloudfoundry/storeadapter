@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/cloudfoundry/storeadapter"
+	"github.com/c4pt0r/storeadapter"
 	"github.com/onsi/gomega/format"
 )
 
