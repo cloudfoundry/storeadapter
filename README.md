@@ -15,3 +15,4 @@ Provides a fake in-memory implementation of the `storeadapter` to allow for unit
 #### `storerunner`
 
 Brings up and manages the lifecycle of a live ETCD/ZooKeeper server cluster.
+test
